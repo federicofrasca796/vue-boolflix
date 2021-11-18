@@ -15,7 +15,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import axios from "axios";
 
 export default {
@@ -25,6 +24,7 @@ export default {
   data() {
     return {
       inputSearch: "",
+      APIkey: "ea6525a1837e2edd64bfb3ffbbb4b8cf",
       searchedMovies: [],
     };
   },
@@ -36,7 +36,7 @@ export default {
       if (this.inputSearch != "") {
         axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=ea6525a1837e2edd64bfb3ffbbb4b8cf&language=en-US&query=${this.inputSearch}&page=1&include_adult=false`
+            `https://api.themoviedb.org/3/search/movie?api_key=${this.APIkey}&language=en-US&query=${this.inputSearch}&page=1&include_adult=false`
           )
           .then((response) => {
             this.searchedMovies = response.data.results;
