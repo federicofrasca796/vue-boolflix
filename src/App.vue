@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <input type="search" name="movie_search" placeholder="Type a movie" id="" />
+    <input type="search" placeholder="Type a movie" v-model="inputSearch" />
     <button>Search</button>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-
+// import axios from "axios";
 export default {
   name: "App",
   components: {},
+  data() {
+    return {
+      inputSearch: "",
+    };
+  },
 };
 </script>
 
