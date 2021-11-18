@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <input type="search" placeholder="Type a movie" v-model="inputSearch" />
-    <button>Search</button>
+    <button @click="searchCallAPI">Search</button>
   </div>
 </template>
 
@@ -19,17 +19,23 @@ export default {
     };
   },
 
-  mounted() {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/search/movie?api_key=ea6525a1837e2edd64bfb3ffbbb4b8cf&language=en-US&query=dune&page=1&include_adult=false"
-      )
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log("API ERROR:" + error);
-      });
+  mounted() {},
+
+  methods: {
+    searchCallAPI() {
+      if (this.inputSearch != "") {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=ea6525a1837e2edd64bfb3ffbbb4b8cf&language=en-US&query=${this.inputSearch}&page=1&include_adult=false`
+          )
+          .then((response) => {
+            console.log(response.data.results);
+          })
+          .catch((error) => {
+            console.log("API ERROR:" + error);
+          });
+      }
+    },
   },
 };
 </script>
