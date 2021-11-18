@@ -1,32 +1,21 @@
 <template>
   <div id="app">
     <site-header @input-movie="searchCallAPI" />
-    <!-- <header id="site_header">
-      <input type="search" placeholder="Type a movie" v-model="inputSearch" />
-      <button @click="searchCallAPI">Search</button>
-    </header> -->
 
-    <main id="site_main">
-      <div class="container">
-        <div class="movie" v-for="movie in searchedMovies" :key="movie.id">
-          <h2 class="title">{{ movie.title }}</h2>
-          <h3 class="og_title">{{ movie.original_title }}</h3>
-          <div class="lang">{{ movie.original_language }}</div>
-          <div class="rating">{{ movie.vote_average }}</div>
-        </div>
-      </div>
-    </main>
+    <site-main :MoviesArr="this.searchedMovies" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import SiteHeader from "./components/SiteHeader.vue";
+import SiteMain from "./components/SiteMain.vue";
 
 export default {
   name: "App",
   components: {
     SiteHeader,
+    SiteMain,
   },
 
   data() {
