@@ -1,5 +1,8 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <input type="search" name="movie_search" placeholder="Type a movie" id="" />
+    <button>Search</button>
+  </div>
 </template>
 
 <script>
@@ -12,4 +15,6 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./assets/scss/variables.scss";
+@import "./assets/scss/common.scss";
 </style>
