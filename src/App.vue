@@ -20,16 +20,16 @@ export default {
   },
 
   mounted() {
-    axios.get(
-      "https://api.themoviedb.org/3/search/movie?api_key=ea6525a1837e2edd64bfb3ffbbb4b8cf&language=en-US&query=dune&page=1&include_adult=false"
-    )
-    .then(response => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/search/movie?api_key=ea6525a1837e2edd64bfb3ffbbb4b8cf&language=en-US&query=dune&page=1&include_adult=false"
+      )
+      .then((response) => {
         console.log(response.data);
-    }).catch(error => {
-        console.log('API ERROR:' + error);
-    })
-
-    }
+      })
+      .catch((error) => {
+        console.log("API ERROR:" + error);
+      });
   },
 };
 </script>
