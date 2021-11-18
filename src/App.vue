@@ -7,14 +7,29 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-// import axios from "axios";
+import axios from "axios";
+
 export default {
   name: "App",
   components: {},
+
   data() {
     return {
       inputSearch: "",
     };
+  },
+
+  mounted() {
+    axios.get(
+      "https://api.themoviedb.org/3/search/movie?api_key=ea6525a1837e2edd64bfb3ffbbb4b8cf&language=en-US&query=dune&page=1&include_adult=false"
+    )
+    .then(response => {
+        console.log(response.data);
+    }).catch(error => {
+        console.log('API ERROR:' + error);
+    })
+
+    }
   },
 };
 </script>
