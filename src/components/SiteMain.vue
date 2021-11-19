@@ -8,12 +8,13 @@
           v-for="movie_tv in MoviesTVArr"
           :key="movie_tv.id"
         >
-          <div class="poster">
+          <div class="poster" v-if="movie_tv.poster_path != null">
             <img
               :src="'https://image.tmdb.org/t/p/w500' + movie_tv.poster_path"
-              alt=""
+              :alt="movie_tv.name + 'poster'"
             />
           </div>
+          <div class="poster_placeholder" v-else>PLACEHOLDER HERE</div>
           <h2 class="title" v-if="movie_tv.name === undefined">
             {{ movie_tv.title }}
           </h2>
@@ -27,12 +28,33 @@
           <img
             class="lang_flag"
             :src="require(`../assets/flags/${movie_tv.original_language}.png`)"
-            alt=""
+            :alt="`${movie_tv.original_language} country flag`"
             width="30px"
           />
 
           <div class="rating">
-            {{ Math.ceil((movie_tv.vote_average * 5) / 10) }}
+            <!-- <div v-if="parseInt(movie_tv.vote_average) < 1">
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+              <i class="far fa-star"></i>
+            </div> -->
+            <div
+              v-for="star in Math.ceil((movie_tv.vote_average * 5) / 10)"
+              :key="star"
+            >
+              <i class="fas fa-star"></i>
+              <div
+                v-for="emptyStar in 5 -
+                Math.ceil((movie_tv.vote_average * 5) / 10)"
+                :key="emptyStar"
+              >
+                <i class="far fa-star"></i>
+              </div>
+            </div>
+            <!-- {{ Math.ceil((movie_tv.vote_average * 5) / 10) }} -->
+            <!-- Dato un numero da 1 a 5, inserisci tante stelle tan -->
           </div>
         </div>
       </div>
@@ -45,6 +67,7 @@ export default {
   props: {
     MoviesTVArr: Array,
   },
+
   methods: {
     convertRating() {
       this.MoviesTVArr;
