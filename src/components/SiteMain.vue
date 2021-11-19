@@ -30,8 +30,10 @@
             alt=""
             width="30px"
           />
-          <!-- <div class="lang">{{ movie_tv.original_language }}</div> -->
-          <div class="rating">{{ movie_tv.vote_average }}</div>
+
+          <div class="rating">
+            {{ Math.ceil((movie_tv.vote_average * 5) / 10) }}
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +45,11 @@ export default {
   props: {
     MoviesTVArr: Array,
   },
-  methods: {},
+  methods: {
+    convertRating() {
+      this.MoviesTVArr;
+    },
+  },
 };
 </script>
 
