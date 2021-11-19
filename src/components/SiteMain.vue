@@ -1,18 +1,29 @@
 <template>
   <main id="site_main">
     <div class="container">
-      <div v-if="MoviesArr.length === 0">0 Movies found</div>
+      <div v-if="MoviesTVArr.length === 0">0 Movies found</div>
       <div v-else>
-        <div class="movie" v-for="movie in MoviesArr" :key="movie.id">
-          <h2 class="title">{{ movie.title }}</h2>
-          <h3 class="og_title">{{ movie.original_title }}</h3>
+        <div
+          class="movie_tv"
+          v-for="movie_tv in MoviesTVArr"
+          :key="movie_tv.id"
+        >
+          <h2 class="title" v-if="movie_tv.name === undefined">
+            {{ movie_tv.title }}
+          </h2>
+          <h2 v-else>{{ movie_tv.name }}</h2>
+          <h3 class="og_title" v-if="movie_tv.original_name === undefined">
+            {{ movie_tv.original_title }}
+          </h3>
+          <h3 v-else>{{ movie_tv.original_name }}</h3>
           <img
-            :src="require(`../assets/flags/${movie.original_language}.png`)"
+            class="lang_flag"
+            :src="require(`../assets/flags/${movie_tv.original_language}.png`)"
             alt=""
             width="30px"
           />
-          <div class="lang">{{ movie.original_language }}</div>
-          <div class="rating">{{ movie.vote_average }}</div>
+          <!-- <div class="lang">{{ movie_tv.original_language }}</div> -->
+          <div class="rating">{{ movie_tv.vote_average }}</div>
         </div>
       </div>
     </div>
@@ -22,7 +33,7 @@
 <script>
 export default {
   props: {
-    MoviesArr: Array,
+    MoviesTVArr: Array,
   },
   methods: {},
 };

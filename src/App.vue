@@ -2,7 +2,7 @@
   <div id="app">
     <site-header @input-movie="searchCallAPI" />
 
-    <site-main :MoviesArr="this.searchedMovies" />
+    <site-main :MoviesTVArr="this.searchedMoviesTV" />
   </div>
 </template>
 
@@ -21,7 +21,9 @@ export default {
     return {
       inputSearch: "",
       APIkey: "ea6525a1837e2edd64bfb3ffbbb4b8cf",
-      searchedMovies: [],
+      moviesURL: "https://api.themoviedb.org/3/search/movie?",
+      tvURL: "https://api.themoviedb.org/3/search/tv?",
+      searchedMoviesTV: [],
     };
   },
 
@@ -31,13 +33,25 @@ export default {
     searchCallAPI(input) {
       if (input != "") {
         axios
-          .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=${this.APIkey}&language=en-US&query=${input}&page=1&include_adult=false`
+          .all([
+            axios.get(
+              `${this.moviesURL}api_key=${this.APIkey}&language=en-US&query=${input}&page=1&include_adult=false`
+            ),
+            axios.get(
+              `${this.tvURL}api_key=${this.APIkey}&language=en-US&page=1&include_adult=false&query=${input}`
+            ),
+          ])
+          .then(
+            axios.spread((respMovies, respTV) => {
+              this.searchedMoviesTV = respMovies.data.results;
+              const tvShow = respTV.data.results;
+              tvShow.forEach((show) => {
+                this.searchedMoviesTV.push(show);
+              });
+              //   console.log(respTV.data.results);
+              console.log(this.searchedMoviesTV);
+            })
           )
-          .then((response) => {
-            this.searchedMovies = response.data.results;
-            console.log(this.searchedMovies);
-          })
           .catch((error) => {
             console.log("API ERROR:" + error);
           });
