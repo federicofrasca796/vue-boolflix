@@ -40,21 +40,18 @@
               <i class="far fa-star"></i>
               <i class="far fa-star"></i>
             </div> -->
-            <div
+            <i
+              class="fas fa-star"
               v-for="star in Math.ceil((movie_tv.vote_average * 5) / 10)"
-              :key="star"
-            >
-              <i class="fas fa-star"></i>
-              <div
-                v-for="emptyStar in 5 -
-                Math.ceil((movie_tv.vote_average * 5) / 10)"
-                :key="emptyStar"
-              >
-                <i class="far fa-star"></i>
-              </div>
-            </div>
-            <!-- {{ Math.ceil((movie_tv.vote_average * 5) / 10) }} -->
-            <!-- Dato un numero da 1 a 5, inserisci tante stelle tan -->
+              :key="star.id"
+            ></i>
+
+            <i
+              class="far fa-star"
+              v-for="emptyStar in 5 -
+              Math.ceil((movie_tv.vote_average * 5) / 10)"
+              :key="emptyStar.id"
+            ></i>
           </div>
         </div>
       </div>
