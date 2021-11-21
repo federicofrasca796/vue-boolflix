@@ -1,10 +1,8 @@
 <template>
   <main id="site_main">
     <div class="container-fluid px-5">
-      <!-- <div v-if="this.emptyArr === true">0 Movies found</div> -->
-      <div>
-        <cardMovie :MoviesTV="MoviesTVArr" />
-      </div>
+      <!-- Movie/TV show card  -->
+      <cardMovie :MoviesTV="MoviesTVArr" />
     </div>
   </main>
 </template>
