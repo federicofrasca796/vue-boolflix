@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <site-header :inputComp="inputSearch" @input-movie="searchCallAPI" />
+    <site-header @input-movie="searchCallAPI" />
 
     <site-main :MoviesTVArr="this.searchedMoviesTV" />
   </div>
@@ -31,7 +31,7 @@ export default {
 
   methods: {
     searchCallAPI(input) {
-      if (input != "" || input === input) {
+      if (input != "") {
         axios
           .all([
             axios.get(
@@ -50,9 +50,8 @@ export default {
                 this.searchedMoviesTV.push(show);
               });
 
-              console.log(this.searchedMoviesTV);
+              //   console.log(this.searchedMoviesTV);
               this.inputSearch = "";
-              //   this.resetSearchInput();
             })
           )
           .catch((error) => {
@@ -61,11 +60,6 @@ export default {
       }
     },
   },
-  /* computed: {
-    resetSearchInput() {
-      return (this.inputSearch = "");
-    },
-  }, */
 };
 </script>
 

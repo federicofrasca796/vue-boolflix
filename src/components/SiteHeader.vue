@@ -32,12 +32,6 @@ export default {
   props: {
     inputComp: String,
   },
-  data() {
-    return {
-      //   inputComp: "",
-    };
-  },
-  methods: {},
 };
 </script>
 
