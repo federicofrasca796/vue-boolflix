@@ -4,11 +4,18 @@
     box-sizing: border-box;
 }
 
-body *{
-    font-size: 1.5rem;
+body{
+    font-size: 1.2rem;
+    background: $dark_bg;
+    color: #ffff;
 }
 
-.container{
-    width: 1200px;
-    margin: auto;
+input{
+          border: 1px solid rgba(255, 255, 255, 0.2);
+    background: $dark_gradient_0;
+    padding: 0.5rem 1rem;
+    caret-color: #ffff;
+}
+::placeholder, input{
+    color: #ffff;
 }

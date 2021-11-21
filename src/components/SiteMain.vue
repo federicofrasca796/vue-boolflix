@@ -33,23 +33,17 @@
           />
 
           <div class="rating">
-            <!-- <div v-if="parseInt(movie_tv.vote_average) < 1">
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-            </div> -->
+            {{ (movie_tv.vote_average * 5) / 10 }}
             <i
               class="fas fa-star"
-              v-for="star in Math.ceil((movie_tv.vote_average * 5) / 10)"
+              v-for="star in Math.round((movie_tv.vote_average * 5) / 10)"
               :key="star.id"
             ></i>
 
             <i
               class="far fa-star"
               v-for="emptyStar in 5 -
-              Math.ceil((movie_tv.vote_average * 5) / 10)"
+              Math.round((movie_tv.vote_average * 5) / 10)"
               :key="emptyStar.id"
             ></i>
           </div>
@@ -74,4 +68,7 @@ export default {
 </script>
 
 <style lang="scss">
+.movie {
+  margin: 2rem 0;
+}
 </style>

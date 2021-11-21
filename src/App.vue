@@ -62,10 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bootstrap/scss/bootstrap";
 @import "./assets/scss/variables.scss";
 @import "./assets/scss/common.scss";
-
-.movie {
-  margin: 2rem 0;
-}
 </style>
