@@ -16,10 +16,10 @@
       <div class="search_bar">
         <input
           placeholder="Titles, actors, genre"
-          v-model="inputSearch"
-          @keyup.enter="$emit('input-movie', inputSearch)"
+          v-model="inputComp"
+          @keyup.enter="$emit('input-movie', inputComp)"
         />
-        <button @click="$emit('input-movie', inputSearch)" class="ms-3">
+        <button @click="$emit('input-movie', inputComp)" class="ms-3">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -29,9 +29,12 @@
 
 <script>
 export default {
+  props: {
+    inputComp: String,
+  },
   data() {
     return {
-      inputSearch: "",
+      //   inputComp: "",
     };
   },
   methods: {},
