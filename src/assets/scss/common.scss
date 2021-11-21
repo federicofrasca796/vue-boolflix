@@ -9,7 +9,10 @@ body{
     background: $dark_bg;
     color: #ffff;
 }
-
+h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
 input{
           border: 1px solid rgba(255, 255, 255, 0.2);
     background: $dark_gradient_0;

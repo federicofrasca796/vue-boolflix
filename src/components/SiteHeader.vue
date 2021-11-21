@@ -45,6 +45,7 @@ export default {
   }
   position: sticky;
   top: 0;
+  z-index: 99;
 }
 
 .search_bar {
