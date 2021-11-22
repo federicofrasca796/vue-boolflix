@@ -1,5 +1,5 @@
 <template>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-5">
     <!-- {{ MoviesTV }} -->
     <div class="col" v-for="movie_tv in MoviesTV" :key="movie_tv.id">
       <!-- Poster  -->
@@ -97,7 +97,8 @@
           <!-- Movie/Tv show overview -->
           <div class="overview my-3">
             <p>
-              {{ movie_tv.overview }}
+              {{ movie_tv.overview.substring(-1, 200) }}
+              <span v-if="movie_tv.overview.length > 200">...</span>
             </p>
           </div>
         </div>
@@ -200,9 +201,7 @@ export default {
 
 .poster {
   width: 100%;
-  height: 439px;
-  //   opacity: 0.3;
-
+  height: 554px;
   & > img {
     object-fit: cover;
   }
@@ -218,9 +217,17 @@ export default {
   .poster_placeholder {
     border-radius: 5px;
   }
+  .poster,
+  .poster_placeholder {
+    transition: opacity 0.2s;
+  }
 }
 .empty_star {
   color: $dark_grey;
+}
+.movie_card .poster,
+.movie_card .poster_placeholder {
+  transition: opacity 0.2s, transform 0.1s;
 }
 .movie_card:hover .movietv_info {
   display: flex;
@@ -228,11 +235,12 @@ export default {
 .movie_card:hover .poster,
 .movie_card:hover .poster_placeholder {
   opacity: 0.3;
+  transform: scale(102%);
 }
 .movietv_info {
   display: none;
   padding: 1rem;
-  height: 439px;
+  height: 554px;
   //   overflow-y: auto;
   .lang_flag {
     width: 40px;
