@@ -1,14 +1,16 @@
 <template>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-6">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-5">
+    <!-- {{ MoviesTV }} -->
     <div class="col" v-for="movie_tv in MoviesTV" :key="movie_tv.id">
       <!-- Poster  -->
       <div class="movie_card position-relative pb-5">
+        <!-- Poster -->
         <div class="poster">
           <img
             class="w-100 h-100"
             v-if="movie_tv.poster_path != null"
             :src="'https://image.tmdb.org/t/p/w342' + movie_tv.poster_path"
-            :alt="movie_tv.name + 'poster'"
+            :alt="movie_tv.name || movie_tv.title + 'poster'"
           />
           <div
             class="
@@ -32,9 +34,18 @@
 
         <!-- Info on hover -->
         <div
-          class="movietv_info position-absolute top-0 left-0 w-100 h-100 p-3"
+          class="
+            movietv_info
+            position-absolute
+            top-0
+            left-0
+            w-100
+            p-3
+            flex-column
+            justify-content-between
+          "
         >
-          <div class="top_info">
+          <div>
             <!-- Title  -->
             <h2 class="title" v-if="movie_tv.name === undefined">
               {{ movie_tv.title }}
@@ -55,36 +66,40 @@
             </div>
 
             <!-- Star Rating  -->
-            <div class="rating">
-              <!-- {{ (movie_tv.vote_average * 5) / 10 }} -->
+            <div class="rating my-2">
               <i
-                class="fas fa-star"
+                class="fas fa-star me-1"
                 v-for="star in Math.round((movie_tv.vote_average * 5) / 10)"
                 :key="star.id"
               ></i>
 
               <i
-                class="far fa-star"
+                class="fas fa-star empty_star me-1"
                 v-for="emptyStar in 5 -
                 Math.round((movie_tv.vote_average * 5) / 10)"
                 :key="emptyStar.id"
               ></i>
+              {{ (movie_tv.vote_average * 5) / 10 }}
             </div>
 
             <!-- Language flag  -->
             <img
               class="lang_flag"
+              v-if="flags.includes(movie_tv.original_language)"
               :src="
                 require(`../assets/flags/${movie_tv.original_language}.png`)
               "
               :alt="`${movie_tv.original_language} country flag`"
             />
+            <div v-else>{{ movie_tv.original_language }}</div>
           </div>
 
           <!-- Movie/Tv show overview -->
-          <p class="overview my-3">
-            {{ movie_tv.overview }}
-          </p>
+          <div class="overview my-3">
+            <p>
+              {{ movie_tv.overview }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -96,6 +111,87 @@ export default {
   props: {
     MoviesTV: Array,
   },
+  data() {
+    return {
+      flags: [
+        "aa",
+        "ab",
+        "af",
+        "ar",
+        "as",
+        "az",
+        "be",
+        "bg",
+        "bm",
+        "bo",
+        "bs",
+        "cn",
+        "cs",
+        "cy",
+        "da",
+        "de",
+        "el",
+        "en",
+        "es",
+        "et",
+        "fa",
+        "fi",
+        "fo",
+        "fr",
+        "ga",
+        "gu",
+        "he",
+        "hi",
+        "hr",
+        "hu",
+        "hy",
+        "id",
+        "is",
+        "it",
+        "ja",
+        "ka",
+        "kk",
+        "km",
+        "kn",
+        "ko",
+        "ku",
+        "la",
+        "lt",
+        "lv",
+        "mk",
+        "ml",
+        "mn",
+        "mr",
+        "ms",
+        "mt",
+        "ne",
+        "nl",
+        "no",
+        "pa",
+        "pl",
+        "pt",
+        "ro",
+        "ru",
+        "sh",
+        "sk",
+        "sl",
+        "sq",
+        "sr",
+        "sv",
+        "ta",
+        "te",
+        "tk",
+        "tl",
+        "tr",
+        "uk",
+        "ur",
+        "vi",
+        "xh",
+        "xx",
+        "zh",
+      ],
+    };
+  },
 };
 </script>
 
@@ -105,7 +201,7 @@ export default {
 .poster {
   width: 100%;
   height: 439px;
-  opacity: 0.5;
+  //   opacity: 0.3;
 
   & > img {
     object-fit: cover;
@@ -122,20 +218,32 @@ export default {
   .poster_placeholder {
     border-radius: 5px;
   }
-  &:hover,
-  .poster_placeholder:hover {
-    opacity: 0.5;
-  }
-
-  .movietv_info {
-    padding: 1rem;
-  }
 }
-.lang_flag {
-  width: 40px;
-  border-radius: 5px;
+.empty_star {
+  color: $dark_grey;
 }
-.overview {
-  overflow-y: visible;
+.movie_card:hover .movietv_info {
+  display: flex;
+}
+.movie_card:hover .poster,
+.movie_card:hover .poster_placeholder {
+  opacity: 0.3;
+}
+.movietv_info {
+  display: none;
+  padding: 1rem;
+  height: 439px;
+  //   overflow-y: auto;
+  .lang_flag {
+    width: 40px;
+    border-radius: 5px;
+  }
+  .overview {
+    height: 120px;
+    p {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
 }
 </style>

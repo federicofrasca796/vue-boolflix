@@ -49,7 +49,7 @@ export default {
               tvShow.forEach((show) => {
                 this.searchedMoviesTV.push(show);
               });
-
+              //   console.log(input);
               //   console.log(this.searchedMoviesTV);
               this.inputSearch = "";
             })
